@@ -10,12 +10,11 @@ import java.util.Base64;
 
 public class Main {
 
-    String KEY = "criptographicSecurity";
+    String KEY = "";
 
     public static void main(String[] args) {
         Main main = new Main();
-        JOptionPane.showMessageDialog(null,main.Encrypt("hello"));
-
+        JOptionPane.showMessageDialog(null,main.Encrypt("Hello"));
 
     }
 
@@ -26,11 +25,11 @@ public class Main {
             byte[]string = key.getBytes(StandardCharsets.UTF_8);
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             string = md.digest(string);
-            string = Arrays.copyOf(string,10);
-            SecretKeySpec sk = new SecretKeySpec(string,"AES");
-            return  sk;
+            string = Arrays.copyOf(string,16);
+            return new SecretKeySpec(string,"AES");
 
         }catch (Exception e){
+            System.out.println("Error createKey");
             return null;
         }
     }
@@ -44,14 +43,17 @@ public class Main {
             cipher.init(Cipher.ENCRYPT_MODE,ske);
             byte[]string = encrypt.getBytes(StandardCharsets.UTF_8);
             byte[]encrypted = cipher.doFinal(string);
-            String encruptedString = Base64.getEncoder().encodeToString(encrypted);
-            return encruptedString;
+            return Base64.getEncoder().encodeToString(encrypted);
 
         }catch (Exception e){
+            System.out.println("Error Encrypt");
             return null;
         }
-
     }
 
     // Decryptation method
+
+    public String Decrypt(String encrypt){
+        
+    }
 }
