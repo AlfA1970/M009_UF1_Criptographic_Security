@@ -10,11 +10,16 @@ import java.util.Base64;
 
 public class Main {
 
-    String KEY = "";
+    String KEY = "ENCRYPT&DECRYPT: METHODS";
 
     public static void main(String[] args) {
+        String toEncrypt = "";
+        String encrypted_string = "";
         Main main = new Main();
-        JOptionPane.showMessageDialog(null,main.Encrypt("Hello"));
+        toEncrypt = JOptionPane.showInputDialog("Enter string to encrypt: ");
+        encrypted_string = main.Encrypt(toEncrypt);
+        JOptionPane.showMessageDialog(null,encrypted_string);
+        JOptionPane.showMessageDialog(null,main.Decrypt(encrypted_string));
 
     }
 
@@ -53,7 +58,21 @@ public class Main {
 
     // Decryptation method
 
-    public String Decrypt(String encrypt){
-        
+    public String Decrypt(String decrypt){
+        try{
+            SecretKeySpec ske = CreateKey(KEY);
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE,ske);
+
+            byte[]string = Base64.getDecoder().decode(decrypt);
+            byte[]decrypted = cipher.doFinal(string);
+            String decryptedString = new String(decrypted);
+            return decryptedString;
+
+        }catch (Exception e){
+            System.out.println("Error Decrypt");
+            e.printStackTrace();
+            return null;
+        }
     }
 }
