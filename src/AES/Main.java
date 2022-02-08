@@ -30,7 +30,9 @@ public class Main {
             byte[]string = key.getBytes(StandardCharsets.UTF_8);
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             string = md.digest(string);
-            string = Arrays.copyOf(string,16);
+            // For diferents kind of ciphers, change  newlength parameter to 16,24 o 32
+            // for encryptations of 128,192 and 256 bits. ONLY FOR AES algorithm
+            string = Arrays.copyOf(string,32);
             return new SecretKeySpec(string,"AES");
 
         }catch (Exception e){
