@@ -64,8 +64,6 @@ public class EncodeMD5 {
             e.printStackTrace();
             System.out.println("Something went wrong!");
         }
-
         return decryptation;
-
     }
 }
