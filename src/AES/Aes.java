@@ -2,24 +2,29 @@ package AES;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import javax.swing.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Scanner;
 
-public class Main {
+public class Aes {
 
     String KEY = "ENCRYPT&DECRYPT: METHODS";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         String toEncrypt = "";
         String encrypted_string = "";
-        Main main = new Main();
-        toEncrypt = JOptionPane.showInputDialog("Enter string to encrypt: ");
+        Aes main = new Aes();
+        Scanner textToEncrypt = new Scanner(System.in);
+        textToEncrypt.useDelimiter("\n");
+        System.out.print("Enter string to encrypt: ");
+        toEncrypt =  textToEncrypt.next();//JOptionPane.showInputDialog("Enter string to encrypt: ");
         encrypted_string = main.Encrypt(toEncrypt);
-        JOptionPane.showMessageDialog(null,encrypted_string);
-        JOptionPane.showMessageDialog(null,main.Decrypt(encrypted_string));
+        Thread.sleep(1300);
+        System.out.println("Encrypted string: " + encrypted_string);
+        Thread.sleep(1300);
+        System.out.println("Decrypted string: " + main.Decrypt(encrypted_string));
 
     }
 

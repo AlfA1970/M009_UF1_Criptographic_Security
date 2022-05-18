@@ -8,18 +8,24 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Scanner;
 
 public class EncodeMD5 {
 
     public String secretKey = "WeAreProgrammers!";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         EncodeMD5 md5 = new EncodeMD5();
-        String messageToEncrypt = JOptionPane.showInputDialog("Enter message to encrypt: ");
+        Scanner textToEncryp = new Scanner(System.in);
+        textToEncryp.useDelimiter("\n");
+        System.out.print("Enter message to encrypt: ");
+        String messageToEncrypt = textToEncryp.next();
         String stringEncrypted = md5.encode(md5.secretKey, messageToEncrypt);
-        JOptionPane.showMessageDialog(null, "String Encrypted: " + stringEncrypted);
+        Thread.sleep(1300);
+        System.out.println("String Encrypted: " + stringEncrypted);
+        Thread.sleep(1300);
         String stringDecrypted = md5.decode(md5.secretKey, stringEncrypted);
-        JOptionPane.showMessageDialog(null, "String Decrypted: " + stringDecrypted);
+        System.out.println("String Decrypted: " + stringDecrypted);
 
     }
 
